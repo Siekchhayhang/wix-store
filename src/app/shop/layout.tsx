@@ -7,7 +7,7 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const collections = await getCollections(await getWixServerClient());
+  const collections = await getCollections(getWixServerClient());
 
   return (
     <SearchFilterLayout collections={collections}>

@@ -47,16 +47,13 @@ export default function Home() {
 async function FeaturedProducts() {
   const wixClient = getWixServerClient();
 
-  const collection = await getCollectionBySlug(
-    await wixClient,
-    "featured-products",
-  );
+  const collection = await getCollectionBySlug(wixClient, "featured-products");
 
   if (!collection?._id) {
     return null;
   }
 
-  const featuredProducts = await queryProducts(await wixClient, {
+  const featuredProducts = await queryProducts(wixClient, {
     collectionIds: collection._id,
   });
 

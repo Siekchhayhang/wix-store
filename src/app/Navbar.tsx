@@ -16,9 +16,9 @@ export default async function Navbar() {
   const wixClient = getWixServerClient();
 
   const [cart, loggedInMember, collections] = await Promise.all([
-    getCart(await wixClient),
-    getLoggedInMember(await wixClient),
-    getCollections(await wixClient),
+    getCart(wixClient),
+    getLoggedInMember(wixClient),
+    getCollections(wixClient),
   ]);
 
   return (

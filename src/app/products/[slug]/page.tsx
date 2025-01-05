@@ -21,7 +21,7 @@ interface PageProps {
 export async function generateMetadata({
   params: { slug },
 }: PageProps): Promise<Metadata> {
-  const product = await getProductBySlug(await getWixServerClient(), slug);
+  const product = await getProductBySlug(getWixServerClient(), slug);
 
   if (!product) notFound();
 
@@ -46,7 +46,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params: { slug } }: PageProps) {
-  const product = await getProductBySlug(await getWixServerClient(), slug);
+  const product = await getProductBySlug(getWixServerClient(), slug);
 
   if (!product?._id) notFound();
 
@@ -74,7 +74,7 @@ interface RelatedProductsProps {
 
 async function RelatedProducts({ productId }: RelatedProductsProps) {
   const relatedProducts = await getRelatedProducts(
-    await getWixServerClient(),
+    getWixServerClient(),
     productId,
   );
 
@@ -111,11 +111,11 @@ async function ProductReviewsSection({ product }: ProductReviewsSectionProps) {
 
   const wixClient = getWixServerClient();
 
-  const loggedInMember = await getLoggedInMember(await wixClient);
+  const loggedInMember = await getLoggedInMember(wixClient);
 
   const existingReview = loggedInMember?.contactId
     ? (
-        await getProductReviews(await wixClient, {
+        await getProductReviews(wixClient, {
           productId: product._id,
           contactId: loggedInMember.contactId,
         })

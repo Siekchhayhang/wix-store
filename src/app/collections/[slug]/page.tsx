@@ -16,7 +16,10 @@ interface PageProps {
 export async function generateMetadata({
   params: { slug },
 }: PageProps): Promise<Metadata> {
-  const collection = await getCollectionBySlug(getWixServerClient(), slug);
+  const collection = await getCollectionBySlug(
+    await getWixServerClient(),
+    slug,
+  );
 
   if (!collection) notFound();
 
@@ -35,7 +38,10 @@ export default async function Page({
   params: { slug },
   searchParams: { page = "1" },
 }: PageProps) {
-  const collection = await getCollectionBySlug(getWixServerClient(), slug);
+  const collection = await getCollectionBySlug(
+    await getWixServerClient(),
+    slug,
+  );
 
   if (!collection?._id) notFound();
 
@@ -57,7 +63,7 @@ interface ProductsProps {
 async function Products({ collectionId, page }: ProductsProps) {
   const pageSize = 8;
 
-  const collectionProducts = await queryProducts(getWixServerClient(), {
+  const collectionProducts = await queryProducts(await getWixServerClient(), {
     collectionIds: collectionId,
     limit: pageSize,
     skip: (page - 1) * pageSize,

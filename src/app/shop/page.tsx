@@ -72,7 +72,7 @@ async function ProductResults({
 }: ProductResultsProps) {
   const pageSize = 8;
 
-  const products = await queryProducts(getWixServerClient(), {
+  const products = await queryProducts(await getWixServerClient(), {
     q,
     limit: pageSize,
     skip: (page - 1) * pageSize,

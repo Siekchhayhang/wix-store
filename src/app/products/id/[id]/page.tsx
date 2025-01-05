@@ -12,7 +12,7 @@ export default async function Page({ params, searchParams }: PageProps) {
     redirect(`/products/i-m-a-product-1?${new URLSearchParams(searchParams)}`);
   }
 
-  const product = await getProductById(getWixServerClient(), params.id);
+  const product = await getProductById(await getWixServerClient(), params.id);
 
   if (!product) notFound();
 

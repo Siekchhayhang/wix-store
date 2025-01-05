@@ -23,9 +23,9 @@ export async function createProductReview(
     member.contact?.firstName && member.contact?.lastName
       ? `${member.contact.firstName} ${member.contact.lastName}`
       : member.contact?.firstName ||
-        member.contact?.lastName ||
-        member.profile?.nickname ||
-        "Anonymous";
+      member.contact?.lastName ||
+      member.profile?.nickname ||
+      "Anonymous";
 
   return wixClient.reviews.createReview({
     author: {
@@ -59,7 +59,7 @@ export async function getProductReviews(
   let query = wixClient.reviews.queryReviews().eq("entityId", productId);
 
   if (contactId) {
-    // @ts-expect-error
+    // {@ts-expect-error}
     query = query.eq("author.contactId", contactId);
   }
 
